@@ -38,15 +38,17 @@ const App = () => {
         <h1>Killer Dart Counter</h1>
       </div>
       <div className='main-container'>
-        {Object.entries(players).map(([id, player]) => (
-          <PlayerRow
-            id={id}
-            player={player}
-            changePlayerName={changePlayerName}
-            changePlayerDartNumber={changePlayerDartNumber}
-            changePlayerPoints={changePlayerPoints}
-          />
-        ))}
+        {Object.entries(players)
+          .sort(([_, { dartNumber: a }], [__, { dartNumber: b }]) => b - a)
+          .map(([id, player]) => (
+            <PlayerRow
+              id={id}
+              player={player}
+              changePlayerName={changePlayerName}
+              changePlayerDartNumber={changePlayerDartNumber}
+              changePlayerPoints={changePlayerPoints}
+            />
+          ))}
       </div>
       <div className='control-container'>
         <div className='new-player-input-container'>
