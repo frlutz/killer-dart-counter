@@ -1,10 +1,11 @@
 import { useLocalStorageState } from './utils';
 import { useState } from 'react';
 import { PlayerRow } from './PlayerRow';
+import { LOCAL_STORE_KEY } from './constants';
 import './App.css';
 
 const App = () => {
-  const [players, setPlayers] = useLocalStorageState('players', {});
+  const [players, setPlayers] = useLocalStorageState(LOCAL_STORE_KEY, {});
 
   const [newPlayerName, setNewPlayerName] = useState('');
 
@@ -74,7 +75,7 @@ const App = () => {
         <div
           className='div-button'
           onClick={() => {
-            window.localStorage.removeItem('players');
+            window.localStorage.removeItem(LOCAL_STORE_KEY);
             setPlayers({});
           }}
         >
