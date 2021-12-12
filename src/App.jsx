@@ -1,37 +1,18 @@
-import { useLocalStorageState } from './utils';
 import { useState } from 'react';
 import { PlayerRow } from './PlayerRow';
-import { LOCAL_STORE_KEY } from './constants';
 import './App.css';
+import { useGame } from './hooks';
 
 const App = () => {
-  const [players, setPlayers] = useLocalStorageState(LOCAL_STORE_KEY, {});
-
+  const {
+    players,
+    addNewPlayer,
+    changePlayerName,
+    changeSection,
+    changePlayerPoints,
+    clearGame,
+  } = useGame();
   const [newPlayerName, setNewPlayerName] = useState('');
-
-  const addPlayer = (playerName) => {
-    setPlayers({
-      ...players,
-      [Object.keys(players).length + 1]: {
-        name: playerName,
-        dartNumber: 0,
-        points: 0,
-      },
-    });
-  };
-
-  const changePlayerName = (id, newName) => {
-    setPlayers({ ...players, [id]: { ...players[id], name: newName } });
-  };
-  const changePlayerDartNumber = (id, newDartNumber) => {
-    setPlayers({
-      ...players,
-      [id]: { ...players[id], dartNumber: newDartNumber },
-    });
-  };
-  const changePlayerPoints = (id, newPoints) => {
-    setPlayers({ ...players, [id]: { ...players[id], points: newPoints } });
-  };
 
   return (
     <div className='app-container'>
@@ -46,7 +27,7 @@ const App = () => {
               id={id}
               player={player}
               changePlayerName={changePlayerName}
-              changePlayerDartNumber={changePlayerDartNumber}
+              changePlayerDartNumber={changeSection}
               changePlayerPoints={changePlayerPoints}
             />
           ))}
@@ -64,7 +45,7 @@ const App = () => {
             htmlFor='newPlayer'
             onClick={() => {
               if (newPlayerName !== '') {
-                addPlayer(newPlayerName);
+                addNewPlayer(newPlayerName);
                 setNewPlayerName('');
               }
             }}
@@ -72,13 +53,7 @@ const App = () => {
             Add player
           </div>
         </div>
-        <div
-          className='div-button'
-          onClick={() => {
-            window.localStorage.removeItem(LOCAL_STORE_KEY);
-            setPlayers({});
-          }}
-        >
+        <div className='div-button' onClick={() => clearGame()}>
           Clear
         </div>
       </div>
