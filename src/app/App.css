@@ -68,12 +68,12 @@ h1 {
   flex: 1;
   display: flex;
   justify-content: center;
-  background: rgb(113, 109, 102);
+  background: rgb(151, 138, 118);
   align-items: center;
 }
 
 .player-row:nth-child(odd) {
-  background: rgb(53, 56, 53);
+  background: rgb(110, 100, 86);
 }
 
 .player-row.killer-color {
@@ -81,7 +81,7 @@ h1 {
 }
 
 .player-row.killed-color {
-  background: rgb(44, 42, 42);
+  background: rgb(47, 45, 45);
 }
 
 .player-cell {
