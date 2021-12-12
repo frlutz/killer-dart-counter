@@ -32,16 +32,15 @@ h1 {
 
 .main-container {
   flex: 1 1 auto;
+  display: flex;
+  flex-flow: column;
 }
 
 .control-container {
   width: 100%;
-  position: fixed;
-  bottom: 0;
   display: flex;
   justify-content: space-around;
-  flex: 0 1 2rem;
-  margin: 2rem 0;
+  padding: 2.2rem 0;
 }
 
 .new-player-input-container {
@@ -62,16 +61,17 @@ h1 {
 }
 
 .player-row {
+  flex: 1;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background: rgb(85, 8, 23);
+  background: rgb(113, 109, 102);
   align-items: center;
 }
 
 .player-row:nth-child(odd) {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background: rgb(17, 68, 17);
+  background: rgb(53, 56, 53);
 }
 
 .player-row.killer-color {
