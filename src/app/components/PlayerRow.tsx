@@ -27,7 +27,12 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
     >
       <div className='player-cell'>
         {!showChangeName ? (
-          <div onClick={() => setShowChangeName(true)}>{name}</div>
+          <div
+            className='player-name-cell'
+            onClick={() => setShowChangeName(true)}
+          >
+            {name}
+          </div>
         ) : (
           <div>
             <input
