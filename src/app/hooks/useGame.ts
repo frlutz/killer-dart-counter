@@ -22,6 +22,7 @@ const useGame = () => {
   };
 
   const changeName = (id: string) => (newName: string) =>
+    newName !== '' &&
     setGame({ ...game, [id]: { ...game[id], name: newName } });
 
   const changeSection = (id: string) => (newSection: number) =>
