@@ -1,27 +1,28 @@
 import { useState } from 'react';
-import './App.css';
+import '../App.css';
+import { PlayerRowProps } from './PlayerRow.types';
 
-export const PlayerRow = ({
+const PlayerRow: React.FC<PlayerRowProps> = ({
   id,
   player,
-  changePlayerName,
-  changePlayerDartNumber,
-  changePlayerPoints,
+  changeName,
+  changeSection,
+  changeScore,
 }) => {
   const [newName, setNewName] = useState('');
-  const [newPoints, setNewDartNumber] = useState();
+  const [newSection, setNewSection] = useState(0);
 
   const [showChangeName, setShowChangeName] = useState(false);
-  const [showChangeDartNumber, setShowChangeDartNumber] = useState(false);
+  const [showChangeSection, setShowChangeSection] = useState(false);
 
-  const { name, dartNumber, points } = player;
+  const { name, section, score } = player;
 
   return (
     <div
       key={id}
       className={`player-row 
-      ${points === 5 ? 'killer-color' : ''} ${
-        points > 5 || points < 0 ? 'killed-color' : ''
+      ${score === 5 ? 'killer-color' : ''} ${
+        score > 5 || score < 0 ? 'killed-color' : ''
       }`}
     >
       <div className='player-cell'>
@@ -46,7 +47,7 @@ export const PlayerRow = ({
             <div
               className='div-button'
               onClick={() => {
-                changePlayerName(id, newName);
+                changeName(newName);
                 setNewName('');
                 setShowChangeName(false);
               }}
@@ -57,20 +58,20 @@ export const PlayerRow = ({
         )}
       </div>
       <div className='player-cell'>
-        {!showChangeDartNumber ? (
-          <div onClick={() => setShowChangeDartNumber(true)}>{dartNumber}</div>
+        {!showChangeSection ? (
+          <div onClick={() => setShowChangeSection(true)}>{section}</div>
         ) : (
           <div>
             <input
-              type='text'
-              value={newPoints}
-              onChange={(e) => setNewDartNumber(e.target.value)}
+              type='number'
+              value={newSection || undefined}
+              onChange={(e) => setNewSection(+e.target.value)}
             />
             <div
               className='div-button'
               onClick={() => {
-                setNewDartNumber('');
-                setShowChangeDartNumber(false);
+                setNewSection(0);
+                setShowChangeSection(false);
               }}
             >
               ❌
@@ -78,9 +79,9 @@ export const PlayerRow = ({
             <div
               className='div-button'
               onClick={() => {
-                changePlayerDartNumber(id, newPoints);
-                setNewDartNumber('');
-                setShowChangeDartNumber(false);
+                changeSection(newSection);
+                setNewSection(0);
+                setShowChangeSection(false);
               }}
             >
               ✅
@@ -88,17 +89,17 @@ export const PlayerRow = ({
           </div>
         )}
       </div>
-      <div className='player-cell points'>
+      <div className='player-cell score'>
         <div
           className='div-button symbol'
-          onClick={() => changePlayerPoints(id, points - 1)}
+          onClick={() => changeScore(score - 1)}
         >
           -
         </div>
-        {points}
+        {score}
         <div
           className='div-button symbol'
-          onClick={() => changePlayerPoints(id, points + 1)}
+          onClick={() => changeScore(score + 1)}
         >
           +
         </div>
@@ -106,3 +107,5 @@ export const PlayerRow = ({
     </div>
   );
 };
+
+export default PlayerRow;

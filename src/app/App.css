@@ -22,7 +22,7 @@ h1 {
 .app-container {
   display: flex;
   flex-flow: column;
-  height: 100%;
+  height: 100vh;
 }
 
 .header-container {
@@ -85,7 +85,7 @@ h1 {
   display: flex;
   justify-content: center;
 }
-.player-cell.points {
+.player-cell.score {
   align-items: center;
   justify-content: space-around;
 }

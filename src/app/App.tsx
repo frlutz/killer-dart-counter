@@ -1,17 +1,11 @@
 import { useState } from 'react';
-import { PlayerRow } from './PlayerRow';
+import PlayerRow from './components/PlayerRow';
 import './App.css';
 import { useGame } from './hooks';
 
 const App = () => {
-  const {
-    players,
-    addNewPlayer,
-    changePlayerName,
-    changeSection,
-    changePlayerPoints,
-    clearGame,
-  } = useGame();
+  const { game, addPlayer, changeName, changeSection, changeScore, clearGame } =
+    useGame();
   const [newPlayerName, setNewPlayerName] = useState('');
 
   return (
@@ -20,32 +14,31 @@ const App = () => {
         <h1>Killer Dart Counter</h1>
       </div>
       <div className='main-container'>
-        {Object.entries(players)
-          .sort(([_, { dartNumber: a }], [__, { dartNumber: b }]) => b - a)
+        {Object.entries(game)
+          .sort(([_, { section: a }], [__, { section: b }]) => b - a)
           .map(([id, player]) => (
             <PlayerRow
+              key={id}
               id={id}
               player={player}
-              changePlayerName={changePlayerName}
-              changePlayerDartNumber={changeSection}
-              changePlayerPoints={changePlayerPoints}
+              changeName={changeName(id)}
+              changeSection={changeSection(id)}
+              changeScore={changeScore(id)}
             />
           ))}
       </div>
       <div className='control-container'>
         <div className='new-player-input-container'>
           <input
-            name='newPlayer'
             type='text'
             value={newPlayerName}
             onChange={(e) => setNewPlayerName(e.target.value)}
           />
           <div
             className='div-button'
-            htmlFor='newPlayer'
             onClick={() => {
               if (newPlayerName !== '') {
-                addNewPlayer(newPlayerName);
+                addPlayer(newPlayerName);
                 setNewPlayerName('');
               }
             }}
