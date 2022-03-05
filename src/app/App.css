@@ -16,7 +16,7 @@ body {
 }
 
 h1 {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .app-container {
@@ -28,6 +28,11 @@ h1 {
 .header-container {
   flex: 0 1 auto;
   text-align: center;
+}
+
+.column-titles {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .main-container {
@@ -48,26 +53,36 @@ h1 {
   justify-content: space-around;
 }
 
-.div-button {
-  font-size: 0.7rem;
-  display: inline-block;
-  padding: 0.1rem 0.5rem;
-  margin: 0.2rem;
-  border: 4px solid #fdfdfd;
-  background: #fdfdfd;
-  color: #505050;
+.button {
   font-weight: 700;
-  border-radius: 10px;
+  text-align: center;
+  vertical-align: middle;
 }
 
-.div-button.symbol {
-  font-size: 1.2rem;
+.control-button {
+  color: #505050;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.5rem;
+  margin: 0.2rem;
+  border-radius: 10px;
+  border: 4px solid #fdfdfd;
+  background: #fdfdfd;
+}
+
+.score-button {
+  font-size: 100%;
+  height: 100%;
+  width: 8vw;
+  background-color: #00000077;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .player-row {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   background: rgb(151, 138, 118);
   align-items: center;
 }

@@ -11,7 +11,14 @@ const App = () => {
   return (
     <div className='app-container'>
       <div className='header-container'>
-        <h1>Killer Dart Counter</h1>
+        <div>
+          <h1>Killer Dart Counter</h1>
+        </div>
+        <div className='column-titles'>
+          <div>Name</div>
+          <div>Section</div>
+          <div>Score</div>
+        </div>
       </div>
       <div className='main-container'>
         {Object.entries(game)
@@ -35,7 +42,7 @@ const App = () => {
             onChange={(e) => setNewPlayerName(e.target.value)}
           />
           <div
-            className='div-button'
+            className='button control-button'
             onClick={() => {
               if (newPlayerName !== '') {
                 addPlayer(newPlayerName);
@@ -46,7 +53,7 @@ const App = () => {
             Add player
           </div>
         </div>
-        <div className='div-button' onClick={() => clearGame()}>
+        <div className='button control-button' onClick={() => clearGame()}>
           Clear
         </div>
       </div>

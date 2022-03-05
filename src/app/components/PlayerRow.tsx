@@ -9,7 +9,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
   changeSection,
   changeScore,
 }) => {
-  const [newName, setNewName] = useState('');
+  const [newName, setNewName] = useState(player.name || '');
   const [newSection, setNewSection] = useState(0);
 
   const [showChangeName, setShowChangeName] = useState(false);
@@ -25,6 +25,12 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
         score > 5 || score < 0 ? 'killed-color' : ''
       }`}
     >
+      <div
+        className='button score-button'
+        onClick={() => changeScore(score - 1)}
+      >
+        -
+      </div>
       <div className='player-cell'>
         {!showChangeName ? (
           <div
@@ -41,7 +47,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
               onChange={(e) => setNewName(e.target.value)}
             />
             <div
-              className='div-button'
+              className='button control-button'
               onClick={() => {
                 setNewName('');
                 setShowChangeName(false);
@@ -50,7 +56,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
               ❌
             </div>
             <div
-              className='div-button'
+              className='button control-button'
               onClick={() => {
                 changeName(newName);
                 setNewName('');
@@ -73,7 +79,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
               onChange={(e) => setNewSection(+e.target.value)}
             />
             <div
-              className='div-button'
+              className='button control-button'
               onClick={() => {
                 setNewSection(0);
                 setShowChangeSection(false);
@@ -82,7 +88,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
               ❌
             </div>
             <div
-              className='div-button'
+              className='button control-button'
               onClick={() => {
                 changeSection(newSection);
                 setNewSection(0);
@@ -94,20 +100,12 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
           </div>
         )}
       </div>
-      <div className='player-cell score'>
-        <div
-          className='div-button symbol'
-          onClick={() => changeScore(score - 1)}
-        >
-          -
-        </div>
-        {score}
-        <div
-          className='div-button symbol'
-          onClick={() => changeScore(score + 1)}
-        >
-          +
-        </div>
+      <div className='player-cell score'>{score}</div>
+      <div
+        className='button score-button'
+        onClick={() => changeScore(score + 1)}
+      >
+        +
       </div>
     </div>
   );
