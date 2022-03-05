@@ -4,8 +4,15 @@ import './App.css';
 import { useGame } from './hooks';
 
 const App = () => {
-  const { game, addPlayer, changeName, changeSection, changeScore, clearGame } =
-    useGame();
+  const {
+    game,
+    addPlayer,
+    changeName,
+    changeSection,
+    changeScore,
+    clearGame,
+    resetGame,
+  } = useGame();
   const [newPlayerName, setNewPlayerName] = useState('');
 
   return (
@@ -50,7 +57,10 @@ const App = () => {
               }
             }}
           >
-            Add player
+            Add
+          </div>
+          <div className='button control-button' onClick={() => resetGame()}>
+            Reset
           </div>
         </div>
         <div className='button control-button' onClick={() => clearGame()}>

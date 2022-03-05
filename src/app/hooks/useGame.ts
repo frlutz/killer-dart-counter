@@ -10,6 +10,18 @@ const useGame = () => {
     setGame({});
   };
 
+  const resetGame = () => {
+    setGame(
+      Object.values(game).reduce(
+        (acc, player) => ({
+          ...acc,
+          [Object.keys(acc).length + 1]: { ...player, section: 0, score: 0 },
+        }),
+        {}
+      )
+    );
+  };
+
   const addPlayer = (name: string) => {
     setGame({
       ...game,
@@ -41,6 +53,7 @@ const useGame = () => {
     changeScore,
     addPlayer,
     clearGame,
+    resetGame,
   };
 };
 
