@@ -1,7 +1,42 @@
 import { useState } from 'react';
+import styled from 'styled-components';
 import PlayerRow from './components/PlayerRow';
 import './App.css';
 import { useGame } from './hooks';
+import ControlButton from './components/ControlButton';
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+`;
+
+const MainContainer = styled.div`
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column;
+`;
+
+const ControlContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  padding: 1.1rem 0.2rem;
+`;
+
+const HeaderContainer = styled.div`
+  flex: 0 1 auto;
+  text-align: center;
+`;
+
+const ColumnTitles = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+const NewPlayerInputContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
 
 const App = () => {
   const {
@@ -16,18 +51,16 @@ const App = () => {
   const [newPlayerName, setNewPlayerName] = useState('');
 
   return (
-    <div className='app-container'>
-      <div className='header-container'>
-        <div>
-          <h1>Killer Dart Counter</h1>
-        </div>
-        <div className='column-titles'>
+    <AppContainer>
+      <HeaderContainer>
+        <h1>Killer Dart Counter</h1>
+        <ColumnTitles>
           <div>Name</div>
           <div>Section</div>
           <div>Score</div>
-        </div>
-      </div>
-      <div className='main-container'>
+        </ColumnTitles>
+      </HeaderContainer>
+      <MainContainer>
         {Object.entries(game)
           .sort(([_, { section: a }], [__, { section: b }]) => b - a)
           .map(([id, player]) => (
@@ -40,16 +73,15 @@ const App = () => {
               changeScore={changeScore(id)}
             />
           ))}
-      </div>
-      <div className='control-container'>
-        <div className='new-player-input-container'>
+      </MainContainer>
+      <ControlContainer>
+        <NewPlayerInputContainer>
           <input
             type='text'
             value={newPlayerName}
             onChange={(e) => setNewPlayerName(e.target.value)}
           />
-          <div
-            className='button control-button'
+          <ControlButton
             onClick={() => {
               if (newPlayerName !== '') {
                 addPlayer(newPlayerName);
@@ -58,16 +90,12 @@ const App = () => {
             }}
           >
             Add
-          </div>
-          <div className='button control-button' onClick={() => resetGame()}>
-            Reset
-          </div>
-        </div>
-        <div className='button control-button' onClick={() => clearGame()}>
-          Clear
-        </div>
-      </div>
-    </div>
+          </ControlButton>
+          <ControlButton onClick={resetGame}>Reset</ControlButton>
+        </NewPlayerInputContainer>
+        <ControlButton onClick={clearGame}>Clear</ControlButton>
+      </ControlContainer>
+    </AppContainer>
   );
 };
 
