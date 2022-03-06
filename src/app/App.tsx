@@ -55,7 +55,7 @@ const App = () => {
           .sort(([_, { section: a }], [__, { section: b }]) => b - a)
           .map(([id, player]) => (
             <PlayerRow
-              key={id}
+              key={`id-${player.name}`}
               id={id}
               player={player}
               changeName={changeName(id)}
