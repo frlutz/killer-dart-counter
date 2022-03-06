@@ -31,14 +31,10 @@ const PlayerRowMainContainer = styled.div`
 `;
 
 const PlayerData = styled.div`
-  max-width: 100%;
   flex: 1;
   display: flex;
   justify-content: center;
   text-align: center;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 `;
 
 const ScoreContainer = styled.div`
