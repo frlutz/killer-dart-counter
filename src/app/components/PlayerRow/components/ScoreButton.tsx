@@ -4,7 +4,7 @@ import { ScoreButtonProps } from './ScoreButton.types';
 const ScoreButtonContainer = styled.div`
   font-size: 100%;
   height: 100%;
-  width: 8vw;
+  width: 14vw;
   background-color: #00000077;
   display: flex;
   justify-content: center;
