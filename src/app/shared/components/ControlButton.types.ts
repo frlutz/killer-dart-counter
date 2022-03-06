@@ -1,4 +1,4 @@
 export type ControlButtonProps = {
-  children: string;
+  children: React.ReactNode;
   onClick: () => void;
 };

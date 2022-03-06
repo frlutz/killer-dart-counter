@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import PlayerChangeInput from './components/PlayerChangeInput';
+import DonutSmallIcon from '@mui/icons-material/DonutSmall';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ScoreButton from './components/ScoreButton';
 import { PlayerRowProps } from './PlayerRow.types';
+import IconValueContainer from './shared/IconValueContainer';
 
 const PlayerRowContainer = styled.div<{ $score: number }>`
   flex: 1;
@@ -39,6 +42,7 @@ const PlayerData = styled.div`
 `;
 
 const ScoreContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,10 +86,15 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
               setGameState={
                 changeSection as (newGameState: string | number) => void
               }
+              Icon={<DonutSmallIcon fontSize='inherit' />}
             />
           </PlayerData>
           <PlayerData>
-            <ScoreContainer>{score}</ScoreContainer>
+            <ScoreContainer>
+              <IconValueContainer Icon={<EmojiEventsIcon fontSize='inherit' />}>
+                {score}
+              </IconValueContainer>
+            </ScoreContainer>
           </PlayerData>
         </PlayerDataContainer>
       </PlayerRowMainContainer>

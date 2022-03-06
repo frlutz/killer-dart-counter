@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 import ControlButton from '../../../shared/components/ControlButton';
 import { PlayerChangeInputProps } from './PlayerChangeInput.types';
+import IconValueContainer from '../shared/IconValueContainer';
 
 const ChangeContainer = styled.div`
   width: 100%;
@@ -24,6 +27,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
   inputType,
   value,
   setGameState,
+  Icon,
 }) => {
   const [controlledValue, setControlledValue] = useState(value);
   const [edit, setEdit] = useState(false);
@@ -42,7 +46,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
               setEdit(false);
             }}
           >
-            ❌
+            <CloseIcon fontSize='small' />
           </ControlButton>
           <ControlButton
             onClick={() => {
@@ -50,7 +54,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
               setEdit(false);
             }}
           >
-            ✅
+            <CheckIcon fontSize='small' />
           </ControlButton>
         </ButtonContainer>
       </ChangeContainer>
@@ -58,7 +62,9 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
   }
 
   return (
-    <ChangeContainer onClick={() => setEdit(true)}>{value}</ChangeContainer>
+    <ChangeContainer onClick={() => setEdit(true)}>
+      <IconValueContainer Icon={Icon}>{value}</IconValueContainer>
+    </ChangeContainer>
   );
 };
 
