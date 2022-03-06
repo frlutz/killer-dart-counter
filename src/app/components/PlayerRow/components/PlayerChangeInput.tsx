@@ -6,6 +6,14 @@ import { PlayerChangeInputProps } from './PlayerChangeInput.types';
 const ChangeContainer = styled.div`
   width: 100%;
   padding: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
 `;
 
 const StyledInput = styled.input`
@@ -28,21 +36,23 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
           value={controlledValue}
           onChange={(e) => setControlledValue(e.target.value)}
         />
-        <ControlButton
-          onClick={() => {
-            setEdit(false);
-          }}
-        >
-          ❌
-        </ControlButton>
-        <ControlButton
-          onClick={() => {
-            setGameState(controlledValue);
-            setEdit(false);
-          }}
-        >
-          ✅
-        </ControlButton>
+        <ButtonContainer>
+          <ControlButton
+            onClick={() => {
+              setEdit(false);
+            }}
+          >
+            ❌
+          </ControlButton>
+          <ControlButton
+            onClick={() => {
+              setGameState(controlledValue);
+              setEdit(false);
+            }}
+          >
+            ✅
+          </ControlButton>
+        </ButtonContainer>
       </ChangeContainer>
     );
   }

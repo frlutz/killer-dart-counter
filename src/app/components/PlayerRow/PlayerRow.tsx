@@ -19,7 +19,15 @@ const PlayerRowContainer = styled.div<{ $score: number }>`
   }}
 `;
 
-const PlayerCell = styled.div`
+const PlayerRowMainContainer = styled.div`
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+`;
+
+const PlayerData = styled.div`
   max-width: 100%;
   flex: 1;
   display: flex;
@@ -28,6 +36,18 @@ const PlayerCell = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+`;
+
+const ScoreContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const PlayerDataContainer = styled.div`
+  display: flex;
+  flex: 1;
+  justifyContent
 `;
 
 const PlayerRow: React.FC<PlayerRowProps> = ({
@@ -46,23 +66,29 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
         operation='decrement'
         changeScore={changeScore}
       />
-      <PlayerCell>
-        <PlayerChangeInput
-          inputType='text'
-          value={name}
-          setGameState={changeName as (newGameState: string | number) => void}
-        />
-      </PlayerCell>
-      <PlayerCell>
-        <PlayerChangeInput
-          inputType='number'
-          value={section}
-          setGameState={
-            changeSection as (newGameState: string | number) => void
-          }
-        />
-      </PlayerCell>
-      <PlayerCell>{score}</PlayerCell>
+      <PlayerRowMainContainer>
+        <PlayerData>
+          <PlayerChangeInput
+            inputType='text'
+            value={name}
+            setGameState={changeName as (newGameState: string | number) => void}
+          />
+        </PlayerData>
+        <PlayerDataContainer>
+          <PlayerData>
+            <PlayerChangeInput
+              inputType='number'
+              value={section}
+              setGameState={
+                changeSection as (newGameState: string | number) => void
+              }
+            />
+          </PlayerData>
+          <PlayerData>
+            <ScoreContainer>{score}</ScoreContainer>
+          </PlayerData>
+        </PlayerDataContainer>
+      </PlayerRowMainContainer>
       <ScoreButton
         score={score}
         operation='increment'

@@ -27,11 +27,6 @@ const HeaderContainer = styled.div`
   text-align: center;
 `;
 
-const ColumnTitles = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`;
-
 const NewPlayerInputContainer = styled.div`
   display: flex;
   justify-content: space-around;
@@ -53,11 +48,6 @@ const App = () => {
     <AppContainer>
       <HeaderContainer>
         <h1>Killer Dart Counter</h1>
-        <ColumnTitles>
-          <div>Name</div>
-          <div>Section</div>
-          <div>Score</div>
-        </ColumnTitles>
       </HeaderContainer>
       <MainContainer>
         {Object.entries(game)
