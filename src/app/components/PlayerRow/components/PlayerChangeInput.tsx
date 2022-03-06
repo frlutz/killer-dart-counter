@@ -53,6 +53,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
             onClick={() => {
               if (removePlayer && controlledValue === '') removePlayer();
               setGameState(controlledValue);
+              setControlledValue(value);
               setEdit(false);
             }}
           >
