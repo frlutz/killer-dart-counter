@@ -9,12 +9,14 @@ const ControlButtonContainer = styled.div`
   border-radius: 10px;
   border: 4px solid #fdfdfd;
   background: #fdfdfd;
+
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
 `;
 
 const ControlButton: React.FC<ControlButtonProps> = ({ children, onClick }) => (
-  <ControlButtonContainer onClick={() => onClick}>
-    {children}
-  </ControlButtonContainer>
+  <ControlButtonContainer onClick={onClick}>{children}</ControlButtonContainer>
 );
 
 export default ControlButton;

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import PlayerRow from './components/PlayerRow';
+import PlayerRow from './components/PlayerRow/PlayerRow';
 import './App.css';
 import { useGame } from './hooks';
-import ControlButton from './components/ControlButton';
+import ControlButton from './shared/components/ControlButton';
 
 const AppContainer = styled.div`
   display: flex;
@@ -91,9 +91,9 @@ const App = () => {
           >
             Add
           </ControlButton>
-          <ControlButton onClick={resetGame}>Reset</ControlButton>
+          <ControlButton onClick={() => resetGame()}>Reset</ControlButton>
         </NewPlayerInputContainer>
-        <ControlButton onClick={clearGame}>Clear</ControlButton>
+        <ControlButton onClick={() => clearGame()}>Clear</ControlButton>
       </ControlContainer>
     </AppContainer>
   );
