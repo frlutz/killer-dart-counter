@@ -13,6 +13,10 @@ const PlayerRowContainer = styled.div<{ $score: number }>`
   background: rgb(151, 138, 118);
   align-items: center;
 
+  &:not(:first-child) {
+    border-top: 2px solid #00000099;
+  }
+
   ${({ $score }) => {
     if ($score === 5) return `background: rgb(255, 67, 67);`;
     if ($score > 5 || $score < 0) return `background: rgb(47, 45, 45)`;
