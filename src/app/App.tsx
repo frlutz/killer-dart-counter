@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import PlayerRow from './components/PlayerRow/PlayerRow';
-import './App.css';
 import { useGame } from './hooks';
 import ControlButton from './shared/components/ControlButton';
 
