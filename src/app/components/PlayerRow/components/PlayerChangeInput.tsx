@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -30,13 +30,20 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
   Icon,
   removePlayer,
 }) => {
-  const [controlledValue, setControlledValue] = useState(value);
+  const [controlledValue, setControlledValue] = useState(
+    value !== 0 ? value : ''
+  );
   const [edit, setEdit] = useState(false);
+
+  useEffect(() => {
+    setControlledValue(value !== 0 ? value : '');
+  }, [value]);
 
   if (edit) {
     return (
       <ChangeContainer>
         <StyledInput
+          autoFocus
           type={inputType}
           value={controlledValue}
           onChange={(e) => setControlledValue(e.target.value)}
@@ -52,9 +59,11 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
           <ControlButton
             onClick={() => {
               if (removePlayer && controlledValue === '') removePlayer();
-              setGameState(controlledValue);
-              setControlledValue(value);
-              setEdit(false);
+              if (controlledValue !== '') {
+                setGameState(controlledValue);
+                setControlledValue(controlledValue);
+                setEdit(false);
+              }
             }}
           >
             <CheckIcon fontSize='small' />
