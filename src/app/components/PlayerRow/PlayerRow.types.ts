@@ -1,4 +1,4 @@
-import { Player } from '../hooks/useGame.types';
+import { Player } from '../../hooks/useGame.types';
 
 export type PlayerRowProps = {
   id: string;
