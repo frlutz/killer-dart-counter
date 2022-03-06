@@ -6,4 +6,5 @@ export type PlayerRowProps = {
   changeName: (newName: string) => void;
   changeSection: (newSection: number) => void;
   changeScore: (newScore: number) => void;
+  removePlayer: () => void;
 };

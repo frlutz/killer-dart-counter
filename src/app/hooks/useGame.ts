@@ -15,7 +15,7 @@ const useGame = () => {
       Object.values(game).reduce(
         (acc, player) => ({
           ...acc,
-          [Object.keys(acc).length + 1]: { ...player, section: 0, score: 0 },
+          [Object.keys(acc).length]: { ...player, section: 0, score: 0 },
         }),
         {}
       )
@@ -25,12 +25,26 @@ const useGame = () => {
   const addPlayer = (name: string) => {
     setGame({
       ...game,
-      [Object.keys(game).length + 1]: {
+      [Object.keys(game).length]: {
         name,
         section: 0,
         score: 0,
       },
     });
+  };
+
+  const removePlayer = (id: string) => {
+    setGame(
+      Object.values(game)
+        .filter((_, index) => +id !== index)
+        .reduce(
+          (acc, player) => ({
+            ...acc,
+            [Object.keys(acc).length]: player,
+          }),
+          {}
+        )
+    );
   };
 
   const changeName = (id: string) => (newName: string) =>
@@ -54,6 +68,7 @@ const useGame = () => {
     addPlayer,
     clearGame,
     resetGame,
+    removePlayer,
   };
 };
 

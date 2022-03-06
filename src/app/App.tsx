@@ -41,6 +41,7 @@ const App = () => {
     changeScore,
     clearGame,
     resetGame,
+    removePlayer,
   } = useGame();
   const [newPlayerName, setNewPlayerName] = useState('');
 
@@ -60,6 +61,7 @@ const App = () => {
               changeName={changeName(id)}
               changeSection={changeSection(id)}
               changeScore={changeScore(id)}
+              removePlayer={() => removePlayer(id)}
             />
           ))}
       </MainContainer>

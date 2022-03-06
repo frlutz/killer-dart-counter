@@ -56,6 +56,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
   changeName,
   changeSection,
   changeScore,
+  removePlayer,
 }) => {
   const { name, section, score } = player;
 
@@ -72,6 +73,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
             inputType='text'
             value={name}
             setGameState={changeName as (newGameState: string | number) => void}
+            removePlayer={removePlayer}
           />
         </PlayerData>
         <PlayerDataContainer>

@@ -3,4 +3,5 @@ export type PlayerChangeInputProps = {
   value: string | number;
   setGameState: (newGameState: string | number) => void;
   Icon?: React.ReactNode;
+  removePlayer?: () => void;
 };
