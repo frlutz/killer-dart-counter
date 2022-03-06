@@ -10,18 +10,24 @@ const PlayerRowContainer = styled.div<{ $score: number }>`
   flex: 1;
   display: flex;
   justify-content: space-between;
-  background: rgb(151, 138, 118);
+  background: #7f7668;
   align-items: center;
 
-  &:not(:first-child) {
-    border-top: 2px solid #00000099;
-  }
-
   ${({ $score }) => {
-    if ($score === 5) return `background: rgb(255, 67, 67);`;
-    if ($score > 5 || $score < 0) return `background: rgb(47, 45, 45)`;
+    if ($score === 5)
+      return `
+      background: #FF4343;
+      :nth-child(odd) {
+        background: #FF4343cc;
+    }`;
+    if ($score > 5 || $score < 0)
+      return `
+      background: #2F2D2D;
+      :nth-child(odd) {
+        background: #2F2D2Dcc;
+    }`;
     return `:nth-child(odd) {
-            background: rgb(110, 100, 86);
+            background: #7f7668bb;
         }`;
   }}
 `;
