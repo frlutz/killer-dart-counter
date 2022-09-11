@@ -15,13 +15,15 @@ const ScoreButton: React.FC<ScoreButtonProps> = ({
   score,
   operation,
   changeScore,
+  flashCallback,
 }) => (
   <ScoreButtonContainer
-    onClick={() =>
+    onClick={() => {
       operation === 'increment'
         ? changeScore(score + 1)
-        : changeScore(score - 1)
-    }
+        : changeScore(score - 1);
+      flashCallback();
+    }}
   >
     {operation === 'increment' ? '+' : '-'}
   </ScoreButtonContainer>

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import PlayerChangeInput from './components/PlayerChangeInput';
 import DonutSmallIcon from '@mui/icons-material/DonutSmall';
@@ -6,14 +7,16 @@ import ScoreButton from './components/ScoreButton';
 import { PlayerRowProps } from './PlayerRow.types';
 import IconValueContainer from './shared/IconValueContainer';
 
-const PlayerRowContainer = styled.div<{ $score: number }>`
+const PlayerRowContainer = styled.div<{ $score: number; $highlight: boolean }>`
   flex: 1;
   display: flex;
   justify-content: space-between;
   background: #7f7668;
   align-items: center;
+  transition: 0.2s;
 
-  ${({ $score }) => {
+  ${({ $score, $highlight }) => {
+    if ($highlight) return `background-color: #FFFFFF77`;
     if ($score === 5)
       return `
       background: #FF4343;
@@ -29,7 +32,7 @@ const PlayerRowContainer = styled.div<{ $score: number }>`
     return `:nth-child(odd) {
             background: #7f7668bb;
         }`;
-  }}
+  }};
 `;
 
 const PlayerRowMainContainer = styled.div`
@@ -68,14 +71,24 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
   changeScore,
   removePlayer,
 }) => {
+  const [highlight, setHighlight] = useState(false);
+
   const { name, section, score } = player;
 
+  const flashCallback = () => {
+    setHighlight(true);
+    setTimeout(() => {
+      setHighlight(false);
+    }, 100);
+  };
+
   return (
-    <PlayerRowContainer key={id} $score={score}>
+    <PlayerRowContainer key={id} $score={score} $highlight={highlight}>
       <ScoreButton
         score={score}
         operation='decrement'
         changeScore={changeScore}
+        flashCallback={() => flashCallback()}
       />
       <PlayerRowMainContainer>
         <PlayerData>
@@ -110,6 +123,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
         score={score}
         operation='increment'
         changeScore={changeScore}
+        flashCallback={() => flashCallback()}
       />
     </PlayerRowContainer>
   );
