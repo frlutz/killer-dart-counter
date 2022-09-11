@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { ControlModal } from './components/ControlModal/ControlModal';
 import PlayerRow from './components/PlayerRow/PlayerRow';
 import { useGame } from './hooks';
-import ControlButton from './shared/components/ControlButton';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const AppContainer = styled.div`
   display: flex;
@@ -16,20 +17,15 @@ const MainContainer = styled.div`
   flex-flow: column;
 `;
 
-const ControlContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  padding: 1.1rem 0.2rem;
-`;
-
 const HeaderContainer = styled.div`
+  display: flex;
   flex: 0 1 auto;
+  justify-content: space-evenly;
   text-align: center;
 `;
 
-const NewPlayerInputContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
+const StyledSettingsIcon = styled(SettingsIcon)`
+  margin: 0.5rem;
 `;
 
 const App = () => {
@@ -43,13 +39,24 @@ const App = () => {
     resetGame,
     removePlayer,
   } = useGame();
-  const [newPlayerName, setNewPlayerName] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <AppContainer>
       <HeaderContainer>
         <h1>Killer Dart Counter</h1>
+        <StyledSettingsIcon onClick={() => setShowModal(!showModal)}>
+          test
+        </StyledSettingsIcon>
       </HeaderContainer>
+      {showModal && (
+        <ControlModal
+          addPlayer={addPlayer}
+          clearGame={clearGame}
+          resetGame={resetGame}
+          toggleModal={() => setShowModal(!showModal)}
+        />
+      )}
       <MainContainer>
         {Object.entries(game)
           .sort(([_, { section: a }], [__, { section: b }]) => b - a)
@@ -65,27 +72,6 @@ const App = () => {
             />
           ))}
       </MainContainer>
-      <ControlContainer>
-        <NewPlayerInputContainer>
-          <input
-            type='text'
-            value={newPlayerName}
-            onChange={(e) => setNewPlayerName(e.target.value)}
-          />
-          <ControlButton
-            onClick={() => {
-              if (newPlayerName !== '') {
-                addPlayer(newPlayerName);
-                setNewPlayerName('');
-              }
-            }}
-          >
-            Add
-          </ControlButton>
-          <ControlButton onClick={() => resetGame()}>Reset</ControlButton>
-        </NewPlayerInputContainer>
-        <ControlButton onClick={() => clearGame()}>Clear</ControlButton>
-      </ControlContainer>
     </AppContainer>
   );
 };
