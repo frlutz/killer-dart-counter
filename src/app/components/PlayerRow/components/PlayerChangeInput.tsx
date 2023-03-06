@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -23,6 +23,9 @@ const StyledInput = styled.input`
   width: 100%;
 `;
 
+const checkValidSection = (sectionValue: number | string) =>
+  0 < +sectionValue && +sectionValue <= 20;
+
 const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
   inputType,
   value,
@@ -30,14 +33,21 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
   Icon,
   removePlayer,
 }) => {
-  const [controlledValue, setControlledValue] = useState(
-    value !== 0 ? value : ''
-  );
+  const [controlledValue, setControlledValue] = useState(value || '');
   const [edit, setEdit] = useState(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const memoizedSetGameState = useCallback(setGameState, []);
 
   useEffect(() => {
-    setControlledValue(value !== 0 ? value : '');
-  }, [value]);
+    if (
+      checkValidSection(controlledValue) &&
+      +controlledValue !== 1 &&
+      +controlledValue !== 2
+    ) {
+      memoizedSetGameState(controlledValue);
+      setEdit(false);
+    }
+  }, [controlledValue, inputType, memoizedSetGameState]);
 
   if (edit) {
     return (
@@ -59,7 +69,10 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
           <ControlButton
             onClick={() => {
               if (removePlayer && controlledValue === '') removePlayer();
-              if (controlledValue !== '') {
+              if (
+                controlledValue !== '' &&
+                checkValidSection(controlledValue)
+              ) {
                 setGameState(controlledValue);
                 setControlledValue(controlledValue);
                 setEdit(false);
