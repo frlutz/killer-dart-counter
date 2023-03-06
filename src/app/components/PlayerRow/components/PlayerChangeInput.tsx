@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -35,8 +35,10 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
 }) => {
   const [controlledValue, setControlledValue] = useState(value || '');
   const [edit, setEdit] = useState(false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const memoizedSetGameState = useCallback(setGameState, []);
+
+  useEffect(() => {
+    setControlledValue(value || '');
+  }, [value]);
 
   useEffect(() => {
     if (
@@ -44,10 +46,11 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
       +controlledValue !== 1 &&
       +controlledValue !== 2
     ) {
-      memoizedSetGameState(controlledValue);
+      setGameState(controlledValue);
       setEdit(false);
     }
-  }, [controlledValue, inputType, memoizedSetGameState]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [controlledValue, inputType]);
 
   if (edit) {
     return (
@@ -62,6 +65,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
           <ControlButton
             onClick={() => {
               setEdit(false);
+              setControlledValue(value);
             }}
           >
             <CloseIcon fontSize='small' />
