@@ -75,7 +75,13 @@ export const ControlModal: React.FC<ControlModalProps> = ({
             Add
           </ControlButton>
         </NewPlayerInputContainer>
-        <ControlButton onClick={() => resetGame()} verticalPadding={2}>
+        <ControlButton
+          onClick={() => {
+            resetGame();
+            toggleModal();
+          }}
+          verticalPadding={2}
+        >
           New game
         </ControlButton>
         <ControlButton onClick={() => clearGame()} verticalPadding={0.8}>
