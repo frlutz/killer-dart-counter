@@ -42,6 +42,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
 
   useEffect(() => {
     if (
+      inputType === 'number' &&
       checkValidSection(controlledValue) &&
       +controlledValue !== 1 &&
       +controlledValue !== 2
@@ -75,7 +76,9 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
               if (removePlayer && controlledValue === '') removePlayer();
               if (
                 controlledValue !== '' &&
-                checkValidSection(controlledValue)
+                ((inputType === 'number' &&
+                  checkValidSection(controlledValue)) ||
+                  inputType === 'text')
               ) {
                 setGameState(controlledValue);
                 setControlledValue(controlledValue);
