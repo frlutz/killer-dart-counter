@@ -1,24 +1,13 @@
-import styled from 'styled-components';
-import { IconValueContainerProps } from './IconValueContainer.types';
-
-const StyledDiv = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-`;
-
-const PaddingDiv = styled.div`
-  padding: 0 8px;
-`;
+import { IconValueContainerProps } from './IconValueContainer.types'
 
 const IconValueContainer: React.FC<IconValueContainerProps> = ({
   children,
   Icon = null,
 }) => (
-  <StyledDiv>
-    {Icon && <PaddingDiv>{Icon}</PaddingDiv>}
-    <PaddingDiv>{children}</PaddingDiv>
-  </StyledDiv>
-);
+  <div className='flex w-full justify-center text-3xl'>
+    {Icon && <div className='px-8'>{Icon}</div>}
+    <div className='px-8 text-center'>{children}</div>
+  </div>
+)
 
-export default IconValueContainer;
+export default IconValueContainer
