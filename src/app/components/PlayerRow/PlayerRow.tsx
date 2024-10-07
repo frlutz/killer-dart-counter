@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PlayerChangeInput from './components/PlayerChangeInput';
 import DonutSmallIcon from '@mui/icons-material/DonutSmall';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import ScoreButton from './components/ScoreButton';
+import ScoreButtonContainer from './components/ScoreButtonContainer'
 import { PlayerRowProps } from './PlayerRow.types';
 import IconValueContainer from './shared/IconValueContainer';
 
@@ -84,7 +84,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
 
   return (
     <PlayerRowContainer key={id} $score={score} $highlight={highlight}>
-      <ScoreButton
+      <ScoreButtonContainer
         score={score}
         operation='decrement'
         changeScore={changeScore}
@@ -119,7 +119,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
           </PlayerData>
         </PlayerDataContainer>
       </PlayerRowMainContainer>
-      <ScoreButton
+      <ScoreButtonContainer
         score={score}
         operation='increment'
         changeScore={changeScore}
