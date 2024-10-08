@@ -3,6 +3,7 @@ import { Dialog, DialogTrigger } from '../components/ui/dialog'
 import { ControlDialog } from './components/ControlDialog/ControlDialog'
 import PlayerRow from './components/PlayerRow/PlayerRow'
 import { useGame } from './hooks'
+import { gameSort } from './utils'
 
 const App = () => {
   const {
@@ -33,19 +34,17 @@ const App = () => {
         </div>
 
         <div className='flex flex-auto flex-col'>
-          {Object.entries(game)
-            .sort(([_, { section: a }], [__, { section: b }]) => b - a)
-            .map(([id, player]) => (
-              <PlayerRow
-                key={`id-${player.name}`}
-                id={id}
-                player={player}
-                changeName={changeName(id)}
-                changeSection={changeSection(id)}
-                changeScore={changeScore(id)}
-                removePlayer={() => removePlayer(id)}
-              />
-            ))}
+          {gameSort(Object.entries(game)).map(([id, player]) => (
+            <PlayerRow
+              key={`id-${player.name}`}
+              id={id}
+              player={player}
+              changeName={changeName(id)}
+              changeSection={changeSection(id)}
+              changeScore={changeScore(id)}
+              removePlayer={() => removePlayer(id)}
+            />
+          ))}
         </div>
       </Dialog>
     </div>
