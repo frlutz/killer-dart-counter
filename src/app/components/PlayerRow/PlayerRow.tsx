@@ -1,67 +1,9 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import PlayerChangeInput from './components/PlayerChangeInput';
-import DonutSmallIcon from '@mui/icons-material/DonutSmall';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import classnames from 'classnames'
+import { ChartPie, Tally5 } from 'lucide-react'
+import PlayerChangeInput from './components/PlayerChangeInput'
 import ScoreButtonContainer from './components/ScoreButtonContainer'
-import { PlayerRowProps } from './PlayerRow.types';
-import IconValueContainer from './shared/IconValueContainer';
-
-const PlayerRowContainer = styled.div<{ $score: number; $highlight: boolean }>`
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
-  background: #7f7668;
-  align-items: center;
-  transition: 0.2s;
-
-  ${({ $score, $highlight }) => {
-    if ($highlight) return `background-color: #FFFFFF77`;
-    if ($score === 5)
-      return `
-      background: #FF4343;
-      :nth-child(odd) {
-        background: #FF4343cc;
-    }`;
-    if ($score > 5 || $score < 0)
-      return `
-      background: #2F2D2D;
-      :nth-child(odd) {
-        background: #2F2D2Dcc;
-    }`;
-    return `:nth-child(odd) {
-            background: #7f7668bb;
-        }`;
-  }};
-`;
-
-const PlayerRowMainContainer = styled.div`
-  height: 100%;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-`;
-
-const PlayerData = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-`;
-
-const ScoreContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const PlayerDataContainer = styled.div`
-  display: flex;
-  flex: 1;
-  justifyContent
-`;
+import { PlayerRowProps } from './PlayerRow.types'
+import IconValueContainer from './shared/IconValueContainer'
 
 const PlayerRow: React.FC<PlayerRowProps> = ({
   id,
@@ -71,62 +13,75 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
   changeScore,
   removePlayer,
 }) => {
-  const [highlight, setHighlight] = useState(false);
+  const { name, section, score } = player
 
-  const { name, section, score } = player;
+  const isDead = score > 5 || score < 0
+  const isKiller = score === 5
 
-  const flashCallback = () => {
-    setHighlight(true);
-    setTimeout(() => {
-      setHighlight(false);
-    }, 100);
-  };
+  const currentVariant = (() => {
+    if (isDead) return 'dead'
+    if (isKiller) return 'killer'
+    return 'base'
+  })()
+
+  const playerRowVariants = {
+    base: 'flex-[5_5_0%] odd:bg-zinc-900 even:bg-zinc-800',
+    dead: 'flex-[3_3_0%] odd:bg-stone-950 even:bg-stone-950 border-solid border-b-2 border-zinc-500',
+    killer: 'flex-[5_5_0%] odd:bg-red-900 even:bg-red-800',
+  }
 
   return (
-    <PlayerRowContainer key={id} $score={score} $highlight={highlight}>
+    <div
+      key={id}
+      className={classnames(
+        `flex justify-between text-center items-center transition duration-200 ${playerRowVariants[currentVariant]}`
+      )}
+    >
       <ScoreButtonContainer
         score={score}
         operation='decrement'
         changeScore={changeScore}
-        flashCallback={() => flashCallback()}
+        // TODO: Re-add flash callback with Tailwind
+        flashCallback={() => {}}
       />
-      <PlayerRowMainContainer>
-        <PlayerData>
+      <div className='h-full w-full flex flex-col justify-evenly'>
+        <div className={`flex flex-1 justify-center text-center items-center`}>
           <PlayerChangeInput
             inputType='text'
             value={name}
             setGameState={changeName as (newGameState: string | number) => void}
             removePlayer={removePlayer}
           />
-        </PlayerData>
-        <PlayerDataContainer>
-          <PlayerData>
+        </div>
+        <div className='flex flex-1 justify-center text-center'>
+          <div className='flex flex-1 justify-center text-center'>
             <PlayerChangeInput
               inputType='number'
               value={section}
               setGameState={
                 changeSection as (newGameState: string | number) => void
               }
-              Icon={<DonutSmallIcon fontSize='inherit' />}
+              Icon={<ChartPie size='40' />}
             />
-          </PlayerData>
-          <PlayerData>
-            <ScoreContainer>
-              <IconValueContainer Icon={<EmojiEventsIcon fontSize='inherit' />}>
+          </div>
+          <div className='flex flex-1 items-center justify-center text-center'>
+            <div className='flex'>
+              <IconValueContainer Icon={<Tally5 size='40' />}>
                 {score}
               </IconValueContainer>
-            </ScoreContainer>
-          </PlayerData>
-        </PlayerDataContainer>
-      </PlayerRowMainContainer>
+            </div>
+          </div>
+        </div>
+      </div>
       <ScoreButtonContainer
         score={score}
         operation='increment'
         changeScore={changeScore}
-        flashCallback={() => flashCallback()}
+        // TODO: Re-add flash callback with Tailwind
+        flashCallback={() => {}}
       />
-    </PlayerRowContainer>
-  );
-};
+    </div>
+  )
+}
 
-export default PlayerRow;
+export default PlayerRow
