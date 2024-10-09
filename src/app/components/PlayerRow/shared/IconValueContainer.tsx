@@ -6,7 +6,7 @@ const IconValueContainer: React.FC<IconValueContainerProps> = ({
 }) => (
   <div className='flex w-full justify-center text-3xl'>
     {Icon && <div className='px-8'>{Icon}</div>}
-    <div className='px-8 text-center'>{children}</div>
+    <div className='text-center'>{children}</div>
   </div>
 )
 

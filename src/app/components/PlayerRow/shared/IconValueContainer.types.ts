@@ -1,3 +1,4 @@
 export type IconValueContainerProps = {
-  Icon?: React.ReactNode;
-};
+  children: React.ReactNode
+  Icon?: React.ReactNode
+}

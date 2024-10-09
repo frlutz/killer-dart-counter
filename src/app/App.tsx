@@ -17,7 +17,6 @@ const App = () => {
     removePlayer,
   } = useGame()
 
-  // TODO: Fix width issue on e.g. iPhone 14 Pro Max
   return (
     <div className='flex flex-col h-screen w-screen bg-primary text-primary-foreground'>
       <Dialog>
