@@ -26,15 +26,16 @@ export const ControlDialog: React.FC<ControlDialogProps> = ({
         </DialogDescription>
       </DialogHeader>
       <div className='flex flex-col space-y-12 items-center'>
-        <div className='flex w-full items-center space-x-2'>
+        <div className='flex flex-col w-full items-center space-y-2'>
           <Input
-            className='w-3/4'
+            className='w-10/12'
             type='text'
             value={newPlayerName}
             onChange={e => setNewPlayerName(e.target.value)}
           />
           <Button
             type='submit'
+            className='w-10/12'
             variant='secondary'
             onClick={() => {
               if (newPlayerName !== '') {
@@ -47,7 +48,7 @@ export const ControlDialog: React.FC<ControlDialogProps> = ({
           </Button>
         </div>
         <Button
-          className='flex w-1/2'
+          className='flex w-3/4'
           variant='secondary'
           onClick={() => {
             resetGame()
@@ -56,7 +57,7 @@ export const ControlDialog: React.FC<ControlDialogProps> = ({
           New round
         </Button>
         <Button
-          className='flex w-1/2'
+          className='flex w-3/4'
           variant='destructive'
           onClick={() => clearGame()}
         >
