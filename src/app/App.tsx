@@ -20,7 +20,7 @@ const App = () => {
   return (
     <div className='flex flex-col h-screen w-screen bg-primary text-primary-foreground'>
       <Dialog>
-        <div className='flex justify-between text-center align-center p-4'>
+        <div className='flex justify-between text-center align-center p-4 border-b-2 border-solid border-zinc-600'>
           <h1 className='text-4xl font-extrabold'>KDC v2</h1>
           <DialogTrigger asChild>
             <Settings className='size-10' />
