@@ -18,7 +18,7 @@ export const ControlDialog: React.FC<ControlDialogProps> = ({
   const [newPlayerName, setNewPlayerName] = useState('')
 
   return (
-    <DialogContent className='bg-primary text-primary-foreground'>
+    <DialogContent className='bg-primary text-primary-foreground rounded-xl'>
       <DialogHeader>
         <DialogTitle>Edit game settings</DialogTitle>
         <DialogDescription>
