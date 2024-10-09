@@ -26,7 +26,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
 
   const playerRowVariants = {
     base: 'flex-[5_5_0%] odd:bg-zinc-900 even:bg-zinc-800',
-    dead: 'flex-[3_3_0%] odd:bg-stone-950 even:bg-stone-950 border-solid border-b-2 border-zinc-500',
+    dead: 'flex-[3_3_0%] odd:bg-stone-950 even:bg-stone-950 border-solid [&:not(:last-child)]:border-b-2 border-zinc-500',
     killer: 'flex-[5_5_0%] odd:bg-red-900 even:bg-red-800',
   }
 
