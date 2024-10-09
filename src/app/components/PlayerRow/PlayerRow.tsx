@@ -65,11 +65,9 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
             />
           </div>
           <div className='flex flex-1 items-center justify-center text-center'>
-            <div className='flex'>
-              <IconValueContainer Icon={<Tally5 size='40' />}>
-                {score}
-              </IconValueContainer>
-            </div>
+            <IconValueContainer Icon={<Tally5 size='40' />}>
+              {score}
+            </IconValueContainer>
           </div>
         </div>
       </div>

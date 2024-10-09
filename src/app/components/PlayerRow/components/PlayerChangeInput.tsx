@@ -90,7 +90,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
 
   return (
     <div
-      className='flex w-full p-2 flex-col justify-center text-center'
+      className='flex w-full flex-col justify-center text-center'
       onClick={() => setEdit(true)}
     >
       <IconValueContainer Icon={Icon}>{value}</IconValueContainer>
