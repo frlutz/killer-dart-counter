@@ -1,19 +1,9 @@
 import CheckIcon from '@mui/icons-material/Check'
 import CloseIcon from '@mui/icons-material/Close'
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
 import ControlButton from '../../../shared/components/ControlButton'
 import IconValueContainer from '../shared/IconValueContainer'
 import { PlayerChangeInputProps } from './PlayerChangeInput.types'
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`
-
-const StyledInput = styled.input`
-  width: 100%;
-`
 
 const checkValidSection = (sectionValue: number | string) =>
   0 < +sectionValue && +sectionValue <= 20
@@ -51,13 +41,14 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
         className='flex w-full p-2 flex-col justify-center'
         onClick={() => setEdit(true)}
       >
-        <StyledInput
+        <input
           autoFocus
+          className='w-full'
           type={inputType}
           value={controlledValue}
           onChange={e => setControlledValue(e.target.value)}
         />
-        <ButtonContainer>
+        <div className='flex justify-evenly'>
           <ControlButton
             onClick={() => {
               setEdit(false)
@@ -66,6 +57,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
           >
             <CloseIcon fontSize='small' />
           </ControlButton>
+          {/* TODO: Fix ControlButton not working properly */}
           <ControlButton
             onClick={() => {
               if (removePlayer && controlledValue === '') removePlayer()
@@ -83,7 +75,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
           >
             <CheckIcon fontSize='small' />
           </ControlButton>
-        </ButtonContainer>
+        </div>
       </div>
     )
   }
