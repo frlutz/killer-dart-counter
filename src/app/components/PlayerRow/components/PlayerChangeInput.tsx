@@ -35,6 +35,7 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [controlledValue, inputType])
 
+  // TODO: Fix Edit not working properly
   if (edit) {
     return (
       <div
@@ -57,7 +58,6 @@ const PlayerChangeInput: React.FC<PlayerChangeInputProps> = ({
           >
             <CloseIcon fontSize='small' />
           </ControlButton>
-          {/* TODO: Fix ControlButton not working properly */}
           <ControlButton
             onClick={() => {
               if (removePlayer && controlledValue === '') removePlayer()

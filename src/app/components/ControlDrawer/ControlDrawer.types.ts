@@ -1,4 +1,4 @@
-export type ControlDialogProps = {
+export type ControlDrawerProps = {
   addPlayer: (name: string) => void
   clearGame: () => void
   resetGame: () => void

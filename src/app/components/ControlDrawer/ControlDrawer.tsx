@@ -1,16 +1,16 @@
 import { useState } from 'react'
 
-import { DialogTitle } from '@radix-ui/react-dialog'
 import { Button } from '../../../components/ui/button'
 import {
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-} from '../../../components/ui/dialog'
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from '../../../components/ui/drawer'
 import { Input } from '../../../components/ui/input'
-import { ControlDialogProps } from './ControlDialog.types'
+import { ControlDrawerProps } from './ControlDrawer.types'
 
-export const ControlDialog: React.FC<ControlDialogProps> = ({
+export const ControlDrawer: React.FC<ControlDrawerProps> = ({
   addPlayer,
   clearGame,
   resetGame,
@@ -18,14 +18,14 @@ export const ControlDialog: React.FC<ControlDialogProps> = ({
   const [newPlayerName, setNewPlayerName] = useState('')
 
   return (
-    <DialogContent className='bg-primary text-primary-foreground rounded-xl'>
-      <DialogHeader>
-        <DialogTitle>Edit game settings</DialogTitle>
-        <DialogDescription>
+    <DrawerContent className='bg-primary text-primary-foreground'>
+      <DrawerHeader>
+        <DrawerTitle>Edit game settings</DrawerTitle>
+        <DrawerDescription>
           Add players, start a new round or erase the entire game state
-        </DialogDescription>
-      </DialogHeader>
-      <div className='flex flex-col space-y-12 items-center'>
+        </DrawerDescription>
+      </DrawerHeader>
+      <div className='flex flex-col space-y-12 items-center mb-8'>
         <div className='flex flex-col w-full items-center space-y-2'>
           <Input
             className='w-10/12'
@@ -56,6 +56,7 @@ export const ControlDialog: React.FC<ControlDialogProps> = ({
         >
           New round
         </Button>
+        {/* TODO: Add confirm click */}
         <Button
           className='flex w-3/4'
           variant='destructive'
@@ -64,6 +65,6 @@ export const ControlDialog: React.FC<ControlDialogProps> = ({
           Erase entire game state
         </Button>
       </div>
-    </DialogContent>
+    </DrawerContent>
   )
 }

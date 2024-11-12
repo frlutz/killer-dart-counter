@@ -1,6 +1,6 @@
 import { Settings } from 'lucide-react'
-import { Dialog, DialogTrigger } from '../components/ui/dialog'
-import { ControlDialog } from './components/ControlDialog/ControlDialog'
+import { Drawer, DrawerTrigger } from '../components/ui/drawer'
+import { ControlDrawer } from './components/ControlDrawer/ControlDrawer'
 import PlayerRow from './components/PlayerRow/PlayerRow'
 import { useGame } from './hooks'
 import { gameSort } from './utils'
@@ -19,17 +19,12 @@ const App = () => {
 
   return (
     <div className='flex flex-col h-screen w-screen bg-primary text-primary-foreground'>
-      <Dialog>
+      <Drawer>
         <div className='flex justify-between text-center align-center p-4 border-b-2 border-solid border-zinc-600'>
           <h1 className='text-4xl font-extrabold'>KDC v2</h1>
-          <DialogTrigger asChild>
+          <DrawerTrigger asChild>
             <Settings className='size-10' />
-          </DialogTrigger>
-          <ControlDialog
-            addPlayer={addPlayer}
-            clearGame={clearGame}
-            resetGame={resetGame}
-          />
+          </DrawerTrigger>
         </div>
 
         <div className='flex flex-auto flex-col'>
@@ -45,7 +40,12 @@ const App = () => {
             />
           ))}
         </div>
-      </Dialog>
+        <ControlDrawer
+          addPlayer={addPlayer}
+          clearGame={clearGame}
+          resetGame={resetGame}
+        />
+      </Drawer>
     </div>
   )
 }
