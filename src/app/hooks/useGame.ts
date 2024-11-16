@@ -1,14 +1,14 @@
-import useLocalStorageGameState from './useLocalStorageGameState';
+import useLocalStorageGameState from './useLocalStorageGameState'
 
-export const LOCAL_STORE_KEY = 'killer-dart-counter:players';
+export const LOCAL_STORE_KEY = 'killer-dart-counter:players'
 
 const useGame = () => {
-  const [game, setGame] = useLocalStorageGameState(LOCAL_STORE_KEY, {});
+  const [game, setGame] = useLocalStorageGameState(LOCAL_STORE_KEY, {})
 
   const clearGame = () => {
-    window.localStorage.removeItem(LOCAL_STORE_KEY);
-    setGame({});
-  };
+    window.localStorage.removeItem(LOCAL_STORE_KEY)
+    setGame({})
+  }
 
   const resetGame = () => {
     setGame(
@@ -19,19 +19,20 @@ const useGame = () => {
         }),
         {}
       )
-    );
-  };
+    )
+  }
 
   const addPlayer = (name: string) => {
     setGame({
       ...game,
       [Object.keys(game).length]: {
+        id: `${Object.keys(game).length}`,
         name,
         section: 0,
         score: 0,
       },
-    });
-  };
+    })
+  }
 
   const removePlayer = (id: string) => {
     setGame(
@@ -44,21 +45,25 @@ const useGame = () => {
           }),
           {}
         )
-    );
-  };
+    )
+  }
 
-  const changeName = (id: string) => (newName: string) =>
-    newName !== '' &&
-    setGame({ ...game, [id]: { ...game[id], name: newName } });
+  const changeName = ({ id, newName }: { id: string; newName: string }) => {
+    console.log(newName)
+    return (
+      newName !== '' &&
+      setGame({ ...game, [id]: { ...game[id], name: newName } })
+    )
+  }
 
-  const changeSection = (id: string) => (newSection: number) =>
+  const changeSection = (id: string, newSection: number) =>
     setGame({
       ...game,
       [id]: { ...game[id], section: newSection },
-    });
+    })
 
   const changeScore = (id: string) => (newScore: number) =>
-    setGame({ ...game, [id]: { ...game[id], score: newScore } });
+    setGame({ ...game, [id]: { ...game[id], score: newScore } })
 
   return {
     game,
@@ -69,7 +74,7 @@ const useGame = () => {
     clearGame,
     resetGame,
     removePlayer,
-  };
-};
+  }
+}
 
-export default useGame;
+export default useGame

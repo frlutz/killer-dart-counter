@@ -1,7 +1,8 @@
 export type Player = {
-  name: string;
-  section: number;
-  score: number;
-};
+  id: string
+  name: string
+  section: number
+  score: number
+}
 
-export type Game = Record<string, Player>;
+export type Game = Record<string, Player>
