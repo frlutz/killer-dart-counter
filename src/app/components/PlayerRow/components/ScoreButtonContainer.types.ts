@@ -1,7 +1,7 @@
 export type ScoreButtonContainerProps = {
   score: number
   operation: 'increment' | 'decrement'
-  changeScore: (newScore: number) => void
+  changeScore: ({ newScore }: { newScore: number }) => void
   disabled: boolean
   flashCallback: () => void
 }

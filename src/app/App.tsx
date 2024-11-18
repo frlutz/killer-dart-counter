@@ -25,8 +25,6 @@ const App = () => {
     useState(false)
   const [currentPlayerAndId, setCurrentPlayer] = useState<Player | null>(null)
 
-  const players = Object.values(game)
-
   return (
     <div className='flex flex-col h-screen w-screen bg-primary text-primary-foreground'>
       <Drawer open={isControlDrawerOpen} onOpenChange={setIsControlDrawerOpen}>
@@ -42,11 +40,11 @@ const App = () => {
           </div>
 
           <div className='flex flex-auto flex-col'>
-            {gameSort(players).map(player => (
+            {gameSort(game.players).map(player => (
               <PlayerRow
                 key={player.id}
                 player={player}
-                changeScore={changeScore(player.id)}
+                changeScore={changeScore({ id: player.id })}
                 setCurrentPlayer={setCurrentPlayer}
                 setIsPlayerChangeDrawerOpen={setIsPlayerChangeDrawerOpen}
               />

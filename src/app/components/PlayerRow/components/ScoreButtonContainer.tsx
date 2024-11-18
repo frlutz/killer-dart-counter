@@ -16,9 +16,9 @@ const ScoreButtonContainer: React.FC<ScoreButtonContainerProps> = ({
       size='icon'
       onClick={() => {
         if (!disabled && operation === 'increment') {
-          changeScore(score + 1)
+          changeScore({ newScore: score + 1 })
         } else {
-          changeScore(score - 1)
+          changeScore({ newScore: score - 1 })
         }
         flashCallback()
       }}

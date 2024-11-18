@@ -5,4 +5,7 @@ export type Player = {
   score: number
 }
 
-export type Game = Record<string, Player>
+export type Game = {
+  firstRound: boolean
+  players: Player[]
+}

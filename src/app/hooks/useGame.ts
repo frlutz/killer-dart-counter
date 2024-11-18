@@ -1,59 +1,58 @@
 import useLocalStorageGameState from './useLocalStorageGameState'
 
-export const LOCAL_STORE_KEY = 'killer-dart-counter:players'
+export const LOCAL_STORE_KEY = 'venomous-dart-counter:players'
 
 const useGame = () => {
-  const [game, setGame] = useLocalStorageGameState(LOCAL_STORE_KEY, {})
+  const [game, setGame] = useLocalStorageGameState(LOCAL_STORE_KEY, {
+    firstRound: true,
+    players: [],
+  })
 
   const clearGame = () => {
     window.localStorage.removeItem(LOCAL_STORE_KEY)
-    setGame({})
+    setGame({ firstRound: true, players: [] })
   }
 
   const resetGame = () => {
-    setGame(
-      Object.values(game).reduce(
-        (acc, player) => ({
-          ...acc,
-          [Object.keys(acc).length]: { ...player, section: 0, score: 0 },
-        }),
-        {}
-      )
-    )
+    setGame({
+      firstRound: true,
+      players: game.players.map(player => ({
+        ...player,
+        section: 0,
+        score: 0,
+      })),
+    })
   }
 
   const addPlayer = (name: string) => {
+    const newPlayer = {
+      id: `${game.players.length}`,
+      name,
+      section: 0,
+      score: 0,
+    }
+
     setGame({
       ...game,
-      [Object.keys(game).length]: {
-        id: `${Object.keys(game).length}`,
-        name,
-        section: 0,
-        score: 0,
-      },
+      players: [...game.players, newPlayer],
     })
   }
 
   const removePlayer = (id: string) => {
-    setGame(
-      Object.values(game)
-        .filter((_, index) => +id !== index)
-        .reduce(
-          (acc, player) => ({
-            ...acc,
-            [Object.keys(acc).length]: player,
-          }),
-          {}
-        )
-    )
+    setGame({
+      ...game,
+      players: game.players.filter(player => player.id !== id),
+    })
   }
 
   const changeName = ({ id, newName }: { id: string; newName: string }) => {
-    console.log(newName)
-    return (
-      newName !== '' &&
-      setGame({ ...game, [id]: { ...game[id], name: newName } })
+    if (newName === '') return
+
+    const updatedPlayers = game.players.map(player =>
+      player.id === id ? { ...player, name: newName } : player
     )
+
+    setGame({ ...game, players: updatedPlayers })
   }
 
   const changeSection = ({
@@ -62,14 +61,23 @@ const useGame = () => {
   }: {
     id: string
     newSection: number
-  }) =>
-    setGame({
-      ...game,
-      [id]: { ...game[id], section: newSection },
-    })
+  }) => {
+    const updatedPlayers = game.players.map(player =>
+      player.id === id ? { ...player, section: newSection } : player
+    )
 
-  const changeScore = (id: string) => (newScore: number) =>
-    setGame({ ...game, [id]: { ...game[id], score: newScore } })
+    setGame({ ...game, players: updatedPlayers })
+  }
+
+  const changeScore =
+    ({ id }: { id: string }) =>
+    ({ newScore }: { newScore: number }) => {
+      const updatedPlayers = game.players.map(player =>
+        player.id === id ? { ...player, score: newScore } : player
+      )
+
+      setGame({ ...game, players: updatedPlayers })
+    }
 
   return {
     game,

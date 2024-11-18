@@ -24,7 +24,6 @@ export const PlayerChangeDrawer: React.FC<PlayerChangeDrawerProps> = ({
   const [controlledSection, setControlledSection] = useState<number | ''>('')
 
   useEffect(() => {
-    console.log(player)
     setControlledPlayerName('')
   }, [player])
   if (!player) return null
