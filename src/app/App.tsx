@@ -35,7 +35,7 @@ const App = () => {
           onOpenChange={setIsPlayerChangeDrawerOpen}
         >
           <div className='flex justify-between text-center align-center p-4 border-b-2 border-solid border-zinc-600'>
-            <h1 className='text-4xl font-extrabold'>KDC v2</h1>
+            <h1 className='text-4xl font-extrabold'>VENOMOUS</h1>
             <Button onClick={() => setIsControlDrawerOpen(true)}>
               <Settings className='size-10' />
             </Button>

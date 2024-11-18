@@ -13,9 +13,9 @@ const customIcon = ({
   exceeded: boolean
   dead: boolean
 }): React.ReactNode => {
-  if (isKiller) return <Droplets size='40' />
-  if (exceeded) return <Bomb size='40' />
-  if (dead) return <Skull size='40' />
+  if (isKiller) return <Droplets size='60' />
+  if (exceeded) return <Bomb size='60' />
+  if (dead) return <Skull size='60' />
   return null
 }
 
@@ -41,7 +41,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
   const playerRowVariants = {
     base: 'flex-[5_5_0%] odd:bg-zinc-900 even:bg-zinc-800',
     dead: 'flex-[3_3_0%] odd:bg-stone-950 even:bg-stone-950 border-solid [&:not(:last-child)]:border-b-2 border-zinc-500',
-    killer: 'flex-[5_5_0%] odd:bg-red-900 even:bg-red-800',
+    killer: 'flex-[5_5_0%] odd:bg-lime-600 even:bg-lime-500',
   }
 
   return (
@@ -54,6 +54,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
       <ScoreButtonContainer
         score={score}
         operation='decrement'
+        disabled={dead}
         changeScore={changeScore}
         // TODO: Re-add flash callback with Tailwind
         flashCallback={() => {}}
@@ -92,6 +93,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
       <ScoreButtonContainer
         score={score}
         operation='increment'
+        disabled={exceeded}
         changeScore={changeScore}
         // TODO: Re-add flash callback with Tailwind
         flashCallback={() => {}}
