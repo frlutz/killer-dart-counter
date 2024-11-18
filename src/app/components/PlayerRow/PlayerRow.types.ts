@@ -1,10 +1,8 @@
-import { Player } from '../../hooks/useGame.types';
+import { Player } from '../../hooks/useGame.types'
 
 export type PlayerRowProps = {
-  id: string;
-  player: Player;
-  changeName: (newName: string) => void;
-  changeSection: (newSection: number) => void;
-  changeScore: (newScore: number) => void;
-  removePlayer: () => void;
-};
+  player: Player
+  changeScore: (newScore: number) => void
+  setCurrentPlayer: (player: Player) => void
+  setIsPlayerChangeDrawerOpen: (open: boolean) => void
+}

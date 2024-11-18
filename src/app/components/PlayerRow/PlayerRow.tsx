@@ -1,19 +1,16 @@
 import classnames from 'classnames'
 import { ChartPie, Tally5 } from 'lucide-react'
-import PlayerChangeInput from './components/PlayerChangeInput'
 import ScoreButtonContainer from './components/ScoreButtonContainer'
 import { PlayerRowProps } from './PlayerRow.types'
 import IconValueContainer from './shared/IconValueContainer'
 
 const PlayerRow: React.FC<PlayerRowProps> = ({
-  id,
   player,
-  changeName,
-  changeSection,
   changeScore,
-  removePlayer,
+  setCurrentPlayer,
+  setIsPlayerChangeDrawerOpen,
 }) => {
-  const { name, section, score } = player
+  const { name, section, score, id } = player
 
   const isDead = score > 5 || score < 0
   const isKiller = score === 5
@@ -46,24 +43,25 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
       />
       <div className='h-full w-full flex flex-col justify-evenly'>
         <div className={`flex flex-1 justify-center text-center items-center`}>
-          <PlayerChangeInput
-            inputType='text'
-            value={name}
-            setGameState={changeName as (newGameState: string | number) => void}
-            removePlayer={removePlayer}
-          />
+          <div
+            className='flex w-full flex-col justify-center text-center'
+            onClick={() => {
+              setCurrentPlayer(player)
+              setIsPlayerChangeDrawerOpen(true)
+            }}
+          >
+            <IconValueContainer>{name}</IconValueContainer>
+          </div>
         </div>
         <div className='flex flex-1 justify-center text-center'>
           <div className='flex flex-1 justify-center text-center'>
-            <PlayerChangeInput
-              inputType='number'
-              value={section}
-              setGameState={
-                changeSection as (newGameState: string | number) => void
-              }
-              Icon={<ChartPie size='40' />}
-            />
+            <div className='flex w-full flex-col justify-center text-center'>
+              <IconValueContainer Icon={<ChartPie size='40' />}>
+                {section}
+              </IconValueContainer>
+            </div>
           </div>
+          {/* TODO: Add killed icon? */}
           <div className='flex flex-1 items-center justify-center text-center'>
             <IconValueContainer Icon={<Tally5 size='40' />}>
               {score}
