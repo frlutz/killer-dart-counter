@@ -46,21 +46,18 @@ const App = () => {
               <PlayerRow
                 key={player.id}
                 player={player}
-                // changeName={changeName(player.id)}
-                // changeSection={changeSection(player.id)}
                 changeScore={changeScore(player.id)}
-                // removePlayer={() => removePlayer(player.id)}
                 setCurrentPlayer={setCurrentPlayer}
                 setIsPlayerChangeDrawerOpen={setIsPlayerChangeDrawerOpen}
               />
             ))}
           </div>
-          {/* TODO: Make Player change drawer change things */}
           <PlayerChangeDrawer
-            player={currentPlayerAndId}
             changeName={changeName}
             changeSection={changeSection}
+            player={currentPlayerAndId}
             removePlayer={removePlayer}
+            setIsPlayerChangeDrawerOpen={setIsPlayerChangeDrawerOpen}
           />
         </Drawer>
         <ControlDrawer

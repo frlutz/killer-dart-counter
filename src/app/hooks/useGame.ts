@@ -56,7 +56,13 @@ const useGame = () => {
     )
   }
 
-  const changeSection = (id: string, newSection: number) =>
+  const changeSection = ({
+    id,
+    newSection,
+  }: {
+    id: string
+    newSection: number
+  }) =>
     setGame({
       ...game,
       [id]: { ...game[id], section: newSection },

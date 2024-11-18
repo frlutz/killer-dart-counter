@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../../../components/ui/button'
 import {
   DrawerContent,
@@ -7,19 +7,29 @@ import {
   DrawerTitle,
 } from '../../../components/ui/drawer'
 import { Input } from '../../../components/ui/input'
+import { Label } from '../../../components/ui/label'
 import { PlayerChangeDrawerProps } from './PlayerChangeDrawer.types'
+
+const checkValidSection = (sectionValue: number | string) =>
+  0 < +sectionValue && +sectionValue <= 20 && sectionValue !== ''
 
 export const PlayerChangeDrawer: React.FC<PlayerChangeDrawerProps> = ({
   player,
   changeName,
   changeSection,
   removePlayer,
+  setIsPlayerChangeDrawerOpen,
 }) => {
   const [controlledPlayerName, setControlledPlayerName] = useState('')
+  const [controlledSection, setControlledSection] = useState<number | ''>('')
+
+  useEffect(() => {
+    console.log(player)
+    setControlledPlayerName('')
+  }, [player])
   if (!player) return null
 
   const { name, section, id } = player
-  // const [newPlayerName, setNewPlayerName] = useState('')
 
   return (
     <DrawerContent className='bg-primary text-primary-foreground'>
@@ -29,34 +39,53 @@ export const PlayerChangeDrawer: React.FC<PlayerChangeDrawerProps> = ({
           {name} currently has section {section}, what would you like to change?
         </DrawerDescription>
       </DrawerHeader>
-      <div className='flex flex-col space-y-12 items-center mb-8'>
-        <div className='flex flex-col w-full items-center space-y-2'>
+      <div className='flex flex-col space-y-6 items-center mb-8'>
+        <div className='grid w-full max-w-sm items-center gap-1.5'>
+          <Label>Name</Label>
           <Input
-            className='w-10/12'
+            className='h-16 text-xl'
             type='text'
+            placeholder={player.name}
             value={controlledPlayerName}
             onChange={e => setControlledPlayerName(e.target.value)}
           />
-          <Button
-            type='submit'
-            className='w-10/12'
-            variant='secondary'
-            onClick={() => {
-              if (controlledPlayerName !== '') {
-                changeName({ id, newName: controlledPlayerName })
-                setControlledPlayerName('')
-              }
-            }}
-          >
-            Change name
-          </Button>
         </div>
+        <div className='grid w-full max-w-sm items-center gap-1.5'>
+          <Label>Section</Label>
+          <Input
+            className='h-16 text-xl'
+            type='number'
+            value={controlledSection}
+            onChange={e => setControlledSection(+e.target.value)}
+          />
+        </div>
+        <Button
+          disabled={!controlledPlayerName && !controlledSection}
+          type='submit'
+          className='w-10/12'
+          variant='secondary'
+          onClick={() => {
+            if (checkValidSection(controlledSection)) {
+              if (controlledSection !== '')
+                changeSection({ id, newSection: controlledSection })
+              changeName({ id, newName: controlledPlayerName })
+              setControlledSection('')
+              setControlledPlayerName('')
+            }
+          }}
+        >
+          Save
+        </Button>
+        {/* TODO: Confirm button */}
         <Button
           className='flex w-3/4'
           variant='destructive'
-          onClick={() => removePlayer(id)}
+          onClick={() => {
+            removePlayer(id)
+            setIsPlayerChangeDrawerOpen(false)
+          }}
         >
-          Erase entire game state
+          Remove player
         </Button>
       </div>
     </DrawerContent>
