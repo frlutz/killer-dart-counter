@@ -1,8 +1,23 @@
 import classnames from 'classnames'
-import { ChartPie, Tally5 } from 'lucide-react'
+import { Bomb, ChartPie, Droplets, Skull, Tally5 } from 'lucide-react'
 import ScoreButtonContainer from './components/ScoreButtonContainer'
 import { PlayerRowProps } from './PlayerRow.types'
 import IconValueContainer from './shared/IconValueContainer'
+
+const customIcon = ({
+  isKiller,
+  exceeded,
+  dead,
+}: {
+  isKiller: boolean
+  exceeded: boolean
+  dead: boolean
+}): React.ReactNode => {
+  if (isKiller) return <Droplets size='40' />
+  if (exceeded) return <Bomb size='40' />
+  if (dead) return <Skull size='40' />
+  return null
+}
 
 const PlayerRow: React.FC<PlayerRowProps> = ({
   player,
@@ -12,7 +27,9 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
 }) => {
   const { name, section, score, id } = player
 
-  const isDead = score > 5 || score < 0
+  const exceeded = score > 5
+  const dead = score < 0
+  const isDead = dead || exceeded
   const isKiller = score === 5
 
   const currentVariant = (() => {
@@ -61,11 +78,14 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
               </IconValueContainer>
             </div>
           </div>
-          {/* TODO: Add killed icon? */}
           <div className='flex flex-1 items-center justify-center text-center'>
-            <IconValueContainer Icon={<Tally5 size='40' />}>
-              {score}
-            </IconValueContainer>
+            {exceeded || dead || isKiller ? (
+              customIcon({ isKiller, exceeded, dead })
+            ) : (
+              <IconValueContainer Icon={<Tally5 size='40' />}>
+                {score}
+              </IconValueContainer>
+            )}
           </div>
         </div>
       </div>
