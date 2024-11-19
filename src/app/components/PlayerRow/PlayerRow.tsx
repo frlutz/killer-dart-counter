@@ -1,5 +1,6 @@
-import classnames from 'classnames'
 import { Bomb, ChartPie, Droplets, Skull, Tally5 } from 'lucide-react'
+import { useState } from 'react'
+import { cn } from '../../../lib/utils'
 import ScoreButtonContainer from './components/ScoreButtonContainer'
 import { PlayerRowProps } from './PlayerRow.types'
 import IconValueContainer from './shared/IconValueContainer'
@@ -26,6 +27,12 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
   setCurrentPlayer,
   setIsPlayerChangeDrawerOpen,
 }) => {
+  const [flash, setFlash] = useState(false)
+
+  const triggerFlash = () => {
+    setFlash(true)
+    setTimeout(() => setFlash(false), 100)
+  }
   const { name, section, score, id } = player
 
   const exceeded = score > 5
@@ -33,23 +40,21 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
   const isDead = dead || exceeded
   const isKiller = score === 5
 
-  const currentVariant = (() => {
-    if (isDead) return 'dead'
-    if (isKiller) return 'killer'
-    return 'base'
-  })()
-
   const playerRowVariants = {
-    base: 'flex-[5_5_0%] odd:bg-zinc-900 even:bg-zinc-800',
+    base: 'flex flex-[5_5_0%] odd:bg-zinc-900 even:bg-zinc-800 justify-between text-center items-center transition duration-300',
     dead: 'flex-[3_3_0%] odd:bg-stone-950 even:bg-stone-950 border-solid [&:not(:last-child)]:border-b-2 border-zinc-500',
-    killer: 'flex-[5_5_0%] odd:bg-lime-600 even:bg-lime-500',
+    killer: 'odd:bg-lime-600 even:bg-lime-500',
+    flash: 'odd:bg-lime-50/60 even:bg-lime-50/60',
   }
 
   return (
     <div
       key={id}
-      className={classnames(
-        `flex justify-between text-center items-center transition duration-200 ${playerRowVariants[currentVariant]}`
+      className={cn(
+        playerRowVariants.base,
+        isDead && playerRowVariants.dead,
+        isKiller && playerRowVariants.killer,
+        flash && playerRowVariants.flash
       )}
     >
       <ScoreButtonContainer
@@ -57,8 +62,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
         operation='decrement'
         disabled={dead}
         changeScore={changeScore}
-        // TODO: Re-add flash callback with Tailwind
-        flashCallback={() => {}}
+        flashCallback={triggerFlash}
       />
       <div className='h-full w-full flex flex-col justify-evenly'>
         <div className={`flex flex-1 justify-center text-center items-center`}>
@@ -96,8 +100,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
         operation='increment'
         disabled={exceeded}
         changeScore={changeScore}
-        // TODO: Re-add flash callback with Tailwind
-        flashCallback={() => {}}
+        flashCallback={triggerFlash}
       />
     </div>
   )
