@@ -8,6 +8,7 @@ import {
   DrawerTitle,
 } from '../../../components/ui/drawer'
 import { Input } from '../../../components/ui/input'
+import { ConfirmButton } from '../ConfirmButton/ConfirmButton'
 import { ControlDrawerProps } from './ControlDrawer.types'
 
 export const ControlDrawer: React.FC<ControlDrawerProps> = ({
@@ -56,14 +57,13 @@ export const ControlDrawer: React.FC<ControlDrawerProps> = ({
         >
           New round
         </Button>
-        {/* TODO: Add confirm click */}
-        <Button
+        <ConfirmButton
+          initialText='Erase entire game state'
+          confirmText='Are you sure?'
           className='flex w-3/4'
           variant='destructive'
           onClick={() => clearGame()}
-        >
-          Erase entire game state
-        </Button>
+        />
       </div>
     </DrawerContent>
   )

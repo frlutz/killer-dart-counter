@@ -8,6 +8,7 @@ import {
 } from '../../../components/ui/drawer'
 import { Input } from '../../../components/ui/input'
 import { Label } from '../../../components/ui/label'
+import { ConfirmButton } from '../ConfirmButton/ConfirmButton'
 import { PlayerChangeDrawerProps } from './PlayerChangeDrawer.types'
 
 const checkValidSection = (sectionValue: number | string) =>
@@ -75,17 +76,16 @@ export const PlayerChangeDrawer: React.FC<PlayerChangeDrawerProps> = ({
         >
           Save
         </Button>
-        {/* TODO: Confirm button */}
-        <Button
+        <ConfirmButton
+          initialText='Remove player'
+          confirmText={`Are you sure you want to remove ${player.name}?`}
           className='flex w-3/4'
           variant='destructive'
           onClick={() => {
             removePlayer(id)
             setIsPlayerChangeDrawerOpen(false)
           }}
-        >
-          Remove player
-        </Button>
+        />
       </div>
     </DrawerContent>
   )
