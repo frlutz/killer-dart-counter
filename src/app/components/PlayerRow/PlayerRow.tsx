@@ -22,13 +22,14 @@ const customIcon = ({
 const PlayerRow: React.FC<PlayerRowProps> = ({
   player,
   changeScore,
+  firstRound,
   setCurrentPlayer,
   setIsPlayerChangeDrawerOpen,
 }) => {
   const { name, section, score, id } = player
 
   const exceeded = score > 5
-  const dead = score < 0
+  const dead = score < 0 || (score === 0 && firstRound === false)
   const isDead = dead || exceeded
   const isKiller = score === 5
 

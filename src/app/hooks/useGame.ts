@@ -24,6 +24,10 @@ const useGame = () => {
     })
   }
 
+  const firstRoundPassed = () => {
+    setGame({ ...game, firstRound: false })
+  }
+
   const addPlayer = (name: string) => {
     const newPlayer = {
       id: `${game.players.length}`,
@@ -80,14 +84,15 @@ const useGame = () => {
     }
 
   return {
-    game,
-    changeName,
-    changeSection,
-    changeScore,
     addPlayer,
+    changeName,
+    changeScore,
+    changeSection,
     clearGame,
-    resetGame,
+    firstRoundPassed,
+    game,
     removePlayer,
+    resetGame,
   }
 }
 

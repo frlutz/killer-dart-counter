@@ -1,4 +1,4 @@
-import { Settings } from 'lucide-react'
+import { ListChecks, Settings } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '../components/ui/button'
 import { Drawer } from '../components/ui/drawer'
@@ -19,6 +19,7 @@ const App = () => {
     clearGame,
     resetGame,
     removePlayer,
+    firstRoundPassed,
   } = useGame()
   const [isControlDrawerOpen, setIsControlDrawerOpen] = useState(false)
   const [isPlayerChangeDrawerOpen, setIsPlayerChangeDrawerOpen] =
@@ -34,9 +35,14 @@ const App = () => {
         >
           <div className='flex justify-between text-center align-center p-4 border-b-2 border-solid border-zinc-600'>
             <h1 className='text-4xl font-extrabold'>VENOMOUS</h1>
-            <Button onClick={() => setIsControlDrawerOpen(true)}>
-              <Settings className='size-10' />
-            </Button>
+            <div>
+              <Button onClick={() => firstRoundPassed()}>
+                <ListChecks className='size-10' />
+              </Button>
+              <Button onClick={() => setIsControlDrawerOpen(true)}>
+                <Settings className='size-10' />
+              </Button>
+            </div>
           </div>
 
           <div className='flex flex-auto flex-col'>
@@ -44,6 +50,7 @@ const App = () => {
               <PlayerRow
                 key={player.id}
                 player={player}
+                firstRound={game.firstRound}
                 changeScore={changeScore({ id: player.id })}
                 setCurrentPlayer={setCurrentPlayer}
                 setIsPlayerChangeDrawerOpen={setIsPlayerChangeDrawerOpen}
