@@ -59,7 +59,7 @@ export const ControlDrawer: React.FC<ControlDrawerProps> = ({
         </Button>
         <ConfirmButton
           initialText='Erase entire game state'
-          confirmText='Are you sure?'
+          confirmText='Are you sure? This removes all players.'
           className='flex w-3/4'
           variant='destructive'
           onClick={() => clearGame()}
