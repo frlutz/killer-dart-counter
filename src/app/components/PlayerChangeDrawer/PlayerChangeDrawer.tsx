@@ -71,6 +71,7 @@ export const PlayerChangeDrawer: React.FC<PlayerChangeDrawerProps> = ({
               changeName({ id, newName: controlledPlayerName })
               setControlledSection('')
               setControlledPlayerName('')
+              setIsPlayerChangeDrawerOpen(false)
             }
           }}
         >
