@@ -54,6 +54,7 @@ export const PlayerChangeDrawer: React.FC<PlayerChangeDrawerProps> = ({
           <Label>Section</Label>
           <Input
             className='h-16 text-xl'
+            placeholder={`${player.section}`}
             type='number'
             value={controlledSection}
             onChange={e => setControlledSection(+e.target.value)}
