@@ -34,7 +34,7 @@ const App = () => {
           onOpenChange={setIsPlayerChangeDrawerOpen}
         >
           <div className='flex justify-between text-center align-center p-4 border-b-2 border-solid border-zinc-600'>
-            <h1 className='text-4xl font-extrabold'>VENOMOUS</h1>
+            <h1 className='text-4xl font-extrabold'>Poisonous</h1>
             <div>
               <Button onClick={() => firstRoundPassed()}>
                 <ListChecks className='size-10' />

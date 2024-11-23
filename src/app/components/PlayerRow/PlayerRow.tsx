@@ -1,4 +1,4 @@
-import { Bomb, ChartPie, Droplets, Skull, Tally5 } from 'lucide-react'
+import { Bomb, ChartPie, Skull, Tally5, TestTubeDiagonal } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '../../../lib/utils'
 import ScoreButtonContainer from './components/ScoreButtonContainer'
@@ -14,7 +14,7 @@ const customIcon = ({
   exceeded: boolean
   dead: boolean
 }): React.ReactNode => {
-  if (isKiller) return <Droplets size='60' />
+  if (isKiller) return <TestTubeDiagonal size='60' />
   if (exceeded) return <Bomb size='60' />
   if (dead) return <Skull size='60' />
   return null
