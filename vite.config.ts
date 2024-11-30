@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/poisonous',
+  base: '/dart',
   plugins: [react()],
   resolve: {
     alias: {

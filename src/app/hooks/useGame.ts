@@ -1,6 +1,6 @@
 import useLocalStorageGameState from './useLocalStorageGameState'
 
-export const LOCAL_STORE_KEY = 'poisonous-dart-counter:players'
+export const LOCAL_STORE_KEY = 'killer-dart-counter:players'
 
 const useGame = () => {
   const [game, setGame] = useLocalStorageGameState(LOCAL_STORE_KEY, {

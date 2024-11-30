@@ -1,4 +1,4 @@
-import { ListChecks, Settings } from 'lucide-react'
+import { Repeat1, Settings } from 'lucide-react'
 import { useState } from 'react'
 import { Button } from '../components/ui/button'
 import { Drawer } from '../components/ui/drawer'
@@ -34,10 +34,10 @@ const App = () => {
           onOpenChange={setIsPlayerChangeDrawerOpen}
         >
           <div className='flex justify-between text-center align-center p-4 border-b-2 border-solid border-zinc-600'>
-            <h1 className='text-4xl font-extrabold'>Poisonous</h1>
+            <h1 className='text-2xl font-extrabold'>Killer Dart Counter</h1>
             <div>
               <Button onClick={() => firstRoundPassed()}>
-                <ListChecks className='size-10' />
+                <Repeat1 className='size-10' />
               </Button>
               <Button onClick={() => setIsControlDrawerOpen(true)}>
                 <Settings className='size-10' />

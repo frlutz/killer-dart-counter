@@ -1,4 +1,4 @@
-import { Bomb, ChartPie, Skull, Tally5, TestTubeDiagonal } from 'lucide-react'
+import { Bomb, ChartPie, Heart, Skull, Swords } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '../../../lib/utils'
 import ScoreButtonContainer from './components/ScoreButtonContainer'
@@ -14,9 +14,9 @@ const customIcon = ({
   exceeded: boolean
   dead: boolean
 }): React.ReactNode => {
-  if (isKiller) return <TestTubeDiagonal size='60' />
-  if (exceeded) return <Bomb size='60' />
-  if (dead) return <Skull size='60' />
+  if (isKiller) return <Swords size='40' />
+  if (exceeded) return <Bomb size='40' />
+  if (dead) return <Skull size='40' />
   return null
 }
 
@@ -43,8 +43,8 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
   const playerRowVariants = {
     base: 'flex flex-[5_5_0%] odd:bg-zinc-900 even:bg-zinc-800 justify-between text-center items-center transition duration-300',
     dead: 'flex-[3_3_0%] odd:bg-stone-950 even:bg-stone-950 border-solid [&:not(:last-child)]:border-b-2 border-zinc-500',
-    killer: 'odd:bg-lime-600 even:bg-lime-500',
-    flash: 'odd:bg-lime-50/60 even:bg-lime-50/60',
+    killer: 'odd:bg-red-700 even:bg-red-800',
+    flash: 'odd:bg-red-50/60 even:bg-red-50/60',
   }
 
   return (
@@ -88,7 +88,7 @@ const PlayerRow: React.FC<PlayerRowProps> = ({
             {exceeded || dead || isKiller ? (
               customIcon({ isKiller, exceeded, dead })
             ) : (
-              <IconValueContainer Icon={<Tally5 size='40' />}>
+              <IconValueContainer Icon={<Heart size='40' />}>
                 {score}
               </IconValueContainer>
             )}
