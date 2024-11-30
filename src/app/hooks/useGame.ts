@@ -1,6 +1,7 @@
+import { v4 as uuidv4 } from 'uuid'
 import useLocalStorageGameState from './useLocalStorageGameState'
 
-export const LOCAL_STORE_KEY = 'killer-dart-counter:players'
+export const LOCAL_STORE_KEY = 'killer-dart-counter-v2:players'
 
 const useGame = () => {
   const [game, setGame] = useLocalStorageGameState(LOCAL_STORE_KEY, {
@@ -30,7 +31,7 @@ const useGame = () => {
 
   const addPlayer = (name: string) => {
     const newPlayer = {
-      id: `${game.players.length}`,
+      id: uuidv4(),
       name,
       section: 0,
       score: 0,
