@@ -37,10 +37,10 @@ const App = () => {
             <h1 className='text-2xl font-extrabold'>Killer Dart Counter</h1>
             <div>
               <Button onClick={() => firstRoundPassed()}>
-                <Repeat1 className='size-10' />
+                <Repeat1 className='size-7' />
               </Button>
               <Button onClick={() => setIsControlDrawerOpen(true)}>
-                <Settings className='size-10' />
+                <Settings className='size-7' />
               </Button>
             </div>
           </div>
